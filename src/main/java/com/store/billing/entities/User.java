@@ -10,12 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
+public class User extends AbstractEntity{
     @Column(name = "name")
     private String name;
 
@@ -29,14 +24,6 @@ public class User {
     @LastModifiedDate
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

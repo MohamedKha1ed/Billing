@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   dtype            character varying(31) NOT NULL,
   id               bigserial not null primary key,
   name             varchar(255),
