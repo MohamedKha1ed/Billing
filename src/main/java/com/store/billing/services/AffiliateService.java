@@ -1,4 +1,4 @@
-package com.store.billing.controllers.services;
+package com.store.billing.services;
 
 import com.store.billing.entities.Affiliate;
 import com.store.billing.repositories.AffiliateRepository;

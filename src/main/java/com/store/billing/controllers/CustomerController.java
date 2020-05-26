@@ -1,6 +1,6 @@
 package com.store.billing.controllers;
 
-import com.store.billing.controllers.services.CustomerService;
+import com.store.billing.services.CustomerService;
 import com.store.billing.entities.Customer;
 import com.store.billing.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;

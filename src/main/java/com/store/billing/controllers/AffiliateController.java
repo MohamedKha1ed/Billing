@@ -1,6 +1,6 @@
 package com.store.billing.controllers;
 
-import com.store.billing.controllers.services.AffiliateService;
+import com.store.billing.services.AffiliateService;
 import com.store.billing.entities.Affiliate;
 import com.store.billing.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
