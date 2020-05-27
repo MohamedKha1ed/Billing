@@ -25,6 +25,13 @@ public class User extends AbstractEntity{
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public User() {
+    }
+
+    public User(Long id) {
+        super(id);
+    }
+
     public String getName() {
         return name;
     }

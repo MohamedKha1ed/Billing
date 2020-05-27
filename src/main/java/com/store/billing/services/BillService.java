@@ -21,29 +21,31 @@ public class BillService {
     @Autowired
     private UserService userService;
 
-    public Double createBill(Bill bill) {
+    public double createBill(Bill bill) {
         bill.setPayableAmount(calculatePayableAmount(bill));
         billRepository.save(bill);
         return bill.getPayableAmount();
     }
 
-    private Double calculatePayableAmount(Bill bill) {
-        double amount = 0.0;
+    public double calculatePayableAmount(Bill bill) {
+        double amount = 1.0;
         User billUser = userService.getUser(bill.getUser().getId());
         List<Long> productIds = bill.getProducts().stream().map(product -> product.getId()).collect(Collectors.toList());
         List<Product> billProducts = productService.getProducts(productIds);
         double GroceriesAmount = billProducts.stream().filter(product -> product.getCategory().equals(Category.GROCERIES)).mapToDouble(Product::getPrice).sum();
         double otherAmount = billProducts.stream().filter(product -> product.getCategory().equals(Category.OTHER)).mapToDouble(Product::getPrice).sum();
-        if (billUser instanceof Employee) {
-            amount = GroceriesAmount + ((70 * otherAmount) / 100);
-        } else if (billUser instanceof Affiliate) {
-            amount = GroceriesAmount + ((90 * otherAmount) / 100);
-        } else if (billUser.getCreatedAt().isBefore(LocalDateTime.now().minusYears(2))){
-            amount = GroceriesAmount + ((95 * otherAmount) / 100);
-        } else {
-            amount = GroceriesAmount + (otherAmount % 100) + ((95 * (otherAmount-(otherAmount%100))) / 100);
-        }
+        return getPayableAmount(billUser, GroceriesAmount, otherAmount);
+    }
 
-        return amount;
+    public double getPayableAmount(User billUser, double GroceriesAmount, double otherAmount) {
+        if (billUser instanceof Employee) {
+            return GroceriesAmount + ((70 * otherAmount) / 100);
+        } else if (billUser instanceof Affiliate) {
+            return GroceriesAmount + ((90 * otherAmount) / 100);
+        } else if (billUser.getCreatedAt().isBefore(LocalDateTime.now().minusYears(2))){
+            return GroceriesAmount + ((95 * otherAmount) / 100);
+        } else {
+            return GroceriesAmount + (otherAmount % 100) + ((95 * (otherAmount-(otherAmount%100))) / 100);
+        }
     }
 }

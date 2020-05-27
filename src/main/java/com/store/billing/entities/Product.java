@@ -15,6 +15,16 @@ public class Product extends AbstractEntity {
     @Column(name = "price")
     private Double price;
 
+    public Product() {
+    }
+
+    public Product(Long id, String name, Category category, Double price) {
+        super(id);
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }

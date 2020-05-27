@@ -10,4 +10,10 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Employee extends User {
+    public Employee() {
+    }
+
+    public Employee(Long id) {
+        super(id);
+    }
 }

@@ -15,7 +15,7 @@ public class BillController {
     private BillService billService;
 
     @PostMapping("/bills")
-    public Double createBill(@RequestBody Bill newBill){
+    public double createBill(@RequestBody Bill newBill){
         return billService.createBill(newBill);
     }
 }
